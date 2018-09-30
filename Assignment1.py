@@ -177,3 +177,6 @@ if __name__ == "__main__":
     tree = Tree()
     for val in vals:
         tree.put(val)
+
+    tree.print_tree()
+    
