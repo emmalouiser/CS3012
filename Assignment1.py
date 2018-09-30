@@ -21,7 +21,6 @@ class Node(object):
     def __str__(self):
         return "[Node val: %d]" % self.val
 
-
 class Tree(object):
     def __init__(self):
         self.root = None
