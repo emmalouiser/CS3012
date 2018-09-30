@@ -57,6 +57,8 @@ class Tree(object):
         return self._find_common(self.root, a, b)
 
     def _find_common(self, node, a, b):
+        if node is None:
+            return None
         # Traverse right until a diverge occurs
         if a > node and b > node:
             if node.right is None: return None
@@ -103,29 +105,8 @@ class Tree(object):
     def _node_exists(self, node, val):
         return not self._get(node, val) is None
 
-if __name__ == "__main__":
-    from sys import stdout
-    vals = [30, 8, 52, 3, 20, 10, 29, 62]
-    tree = Tree()
-    [tree.put(val) for val in vals]
-    pairs = [
-        (3, 20),
-        (3, 29),
-        (10, 29),
-        (20, 52),
-        (3, 62),
-        (4, 29),
-        (3, 1),
-        (8, 3),
-        (8, 20)
-    ]
-    for (a, b) in pairs:
-        stdout.write("Common for %d & %d: " % (a, b))
-        print (tree.find_common(a, b))
-    unittest.main()
-
     def print_tree(self):
-        _print_tree(self.root)
+        self._print_tree(self.root)
 
 
     def _print_tree(self, node):
@@ -150,8 +131,7 @@ class TestStringMethods(unittest.TestCase):
         tree = Tree()
         self.assertEqual(tree.find_common(1, 2), None)
 
-    def test_upper(self):
-        self.assertEqual('foo'.upper(), 'FOO')
+
 
     def test_isupper(self):
         self.assertTrue('FOO'.isupper())
@@ -164,11 +144,12 @@ class TestStringMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             s.split(2)
 
-if __name__ == "__main__":
-    #unittest.main()
-    vals = [1, 2, 3]
-    tree = Tree()
-    for val in vals:
-        tree.put(val)
 
-    tree.print_tree()
+vals = [3, 2, 1]
+tree = Tree()
+for val in vals:
+    tree.put(val)
+
+tree.print_tree()
+
+unittest.main()
