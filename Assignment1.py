@@ -136,8 +136,6 @@ class TestStringMethods(unittest.TestCase):
         for val in vals:
             tree.put(val)
 
-        print(tree.find_common(1,3))
-
         self.assertEqual(tree.find_common(1,3), 2)
 
 
@@ -151,7 +149,6 @@ class TestStringMethods(unittest.TestCase):
         # check that s.split fails when the separator is not a string
         with self.assertRaises(TypeError):
             s.split(2)
-
 
 vals = [30, 8, 52, 3, 20, 10, 29, 62]
 tree = Tree()
