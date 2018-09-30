@@ -1,16 +1,15 @@
 import unittest
 from sys import stdout
-import coverage
+#from coverage import Coverage
 
-cov = coverage.Coverage()
-cov.start()
+#cov = Coverage()
+#cov.start()
 
 class Node(object):
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
-
 
     def __lt__(self, val):
         return self.val < val
@@ -111,18 +110,6 @@ class Tree(object):
     def print_tree(self):
         self._print_tree(self.root)
 
-
-    def _print_tree(self, node):
-        if node is None:
-            return
-
-        self._print_tree(node.left)
-        print(node.val)
-        self._print_tree(node.right)
-
-        return
-
-
 class TestStringMethods(unittest.TestCase):
 
     def test_constructor(self):
@@ -134,7 +121,7 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(tree.find_common(1, 2), None)
 
     def test_simple_tree(self):
-        vals = [2, 1, 3]
+        vals = [2, 1, 3, 3]
         tree = Tree()
         for val in vals:
             tree.put(val)
@@ -165,6 +152,9 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(tree.find_common(3, 1), 8)
         self.assertEqual(tree.find_common(8, 3), 30)
         self.assertEqual(tree.find_common(8, 20), 30)
+        self.assertEqual(tree.find_common(62, 52), 30)
+        self.assertEqual(tree.find_common(10, 20), 8)
+        self.assertEqual(tree.find_common(3, 8), 30)
 
     def test_not_in_tree(self):
         vals = [30, 8, 52, 3, 20, 10, 29, 62]
@@ -187,9 +177,12 @@ class TestStringMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             s.split(2)
 
-unittest.main()
+if __name__ == "__main__":
+    print("Hi")
+    unittest.main()
+    print("Hi")
 
-cov.stop()
-cov.save()
-
-cov.html_report()
+    #cov.stop()
+    #cov.html_report(directory='covhtml')
+    #cov.save()
+    #cov.report()
