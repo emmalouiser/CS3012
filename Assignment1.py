@@ -1,6 +1,9 @@
 import unittest
 from sys import stdout
+import coverage
 
+cov = coverage.Coverage()
+cov.start()
 
 class Node(object):
     def __init__(self, val):
@@ -138,7 +141,7 @@ class TestStringMethods(unittest.TestCase):
 
         self.assertEqual(tree.find_common(1,3), 2)
 
-    def test_complex_tree(self):
+    def test_order(self):
         vals = [30, 8, 52, 3, 20, 10, 29, 62]
         tree = Tree()
         for val in vals:
@@ -146,6 +149,31 @@ class TestStringMethods(unittest.TestCase):
 
         self.assertEqual(tree.find_common(3, 20), 8)
         self.assertEqual(tree.find_common(20, 3), 8)
+
+    def test_complex_tree(self):
+        vals = [30, 8, 52, 3, 20, 10, 29, 62]
+        tree = Tree()
+        for val in vals:
+            tree.put(val)
+
+        self.assertEqual(tree.find_common(3, 29), 8)
+        self.assertEqual(tree.find_common(10, 29), 20)
+        self.assertEqual(tree.find_common(20, 52), 30)
+        self.assertEqual(tree.find_common(3, 62), 30)
+        self.assertEqual(tree.find_common(4, 29), None)
+        self.assertEqual(tree.find_common(29, 4), None)
+        self.assertEqual(tree.find_common(3, 1), 8)
+        self.assertEqual(tree.find_common(8, 3), 30)
+        self.assertEqual(tree.find_common(8, 20), 30)
+
+    def test_not_in_tree(self):
+        vals = [30, 8, 52, 3, 20, 10, 29, 62]
+        tree = Tree()
+        for val in vals:
+            tree.put(val)
+
+        self.assertEqual(tree.find_common(4, 29), None)
+        self.assertEqual(tree.find_common(29, 4), None)
 
 
     def test_isupper(self):
@@ -159,23 +187,9 @@ class TestStringMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             s.split(2)
 
-vals = [30, 8, 52, 3, 20, 10, 29, 62]
-tree = Tree()
-for val in vals:
-    tree.put(val)
-pairs = [
-    (3, 20),
-    (3, 29),
-    (10, 29),
-    (20, 52),
-    (3, 62),
-    (4, 29),
-    (3, 1),
-    (8, 3),
-    (8, 20)
-]
-for (a, b) in pairs:
-    stdout.write("Common for %d & %d: " % (a, b))
-    print (tree.find_common(a, b))
-
 unittest.main()
+
+cov.stop()
+cov.save()
+
+cov.html_report()
