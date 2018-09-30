@@ -138,6 +138,15 @@ class TestStringMethods(unittest.TestCase):
 
         self.assertEqual(tree.find_common(1,3), 2)
 
+    def test_complex_tree(self):
+        vals = [30, 8, 52, 3, 20, 10, 29, 62]
+        tree = Tree()
+        for val in vals:
+            tree.put(val)
+
+        self.assertEqual(tree.find_common(3, 20), 8)
+        self.assertEqual(tree.find_common(20, 3), 8)
+
 
     def test_isupper(self):
         self.assertTrue('FOO'.isupper())
@@ -152,7 +161,8 @@ class TestStringMethods(unittest.TestCase):
 
 vals = [30, 8, 52, 3, 20, 10, 29, 62]
 tree = Tree()
-[tree.put(val) for val in vals]
+for val in vals:
+    tree.put(val)
 pairs = [
     (3, 20),
     (3, 29),
@@ -167,9 +177,5 @@ pairs = [
 for (a, b) in pairs:
     stdout.write("Common for %d & %d: " % (a, b))
     print (tree.find_common(a, b))
+
 unittest.main()
-vals = [2, 1, 3]
-tree = Tree()
-for val in vals:
-    tree.put(val)
-print(tree.print_tree())
