@@ -110,12 +110,11 @@ class Tree(object):
 
 
     def _print_tree(self, node):
-
         if node is None:
             return
 
         self._print_tree(node.left)
-        print(node)
+        print(node.val)
         self._print_tree(node.right)
 
         return
@@ -131,6 +130,15 @@ class TestStringMethods(unittest.TestCase):
         tree = Tree()
         self.assertEqual(tree.find_common(1, 2), None)
 
+    def test_simple_tree(self):
+        vals = [2, 1, 3]
+        tree = Tree()
+        for val in vals:
+            tree.put(val)
+
+        print(tree.find_common(1,3))
+
+        self.assertEqual(tree.find_common(1,3), 2)
 
 
     def test_isupper(self):
@@ -145,11 +153,26 @@ class TestStringMethods(unittest.TestCase):
             s.split(2)
 
 
-vals = [3, 2, 1]
+vals = [30, 8, 52, 3, 20, 10, 29, 62]
+tree = Tree()
+[tree.put(val) for val in vals]
+pairs = [
+    (3, 20),
+    (3, 29),
+    (10, 29),
+    (20, 52),
+    (3, 62),
+    (4, 29),
+    (3, 1),
+    (8, 3),
+    (8, 20)
+]
+for (a, b) in pairs:
+    stdout.write("Common for %d & %d: " % (a, b))
+    print (tree.find_common(a, b))
+unittest.main()
+vals = [2, 1, 3]
 tree = Tree()
 for val in vals:
     tree.put(val)
-
-tree.print_tree()
-
-unittest.main()
+print(tree.print_tree())
