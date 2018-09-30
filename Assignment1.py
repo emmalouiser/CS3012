@@ -8,6 +8,7 @@ class Node(object):
         self.left = None
         self.right = None
 
+
     def __lt__(self, val):
         return self.val < val
 
