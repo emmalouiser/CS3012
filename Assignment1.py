@@ -131,20 +131,13 @@ if __name__ == "__main__":
     def _print_tree(self, node):
 
         if node is None:
-            print("")
             return
 
-        if node.left is None:
-            print("")
-            return
-        else:
-            _print_tree(node.left)
+        self._print_tree(node.left)
+        print(node)
+        self._print_tree(node.right)
 
-        if node.right is None:
-            print("")
-            return
-        else:
-            _print_tree(node.right)
+        return
 
 
 class TestStringMethods(unittest.TestCase):
