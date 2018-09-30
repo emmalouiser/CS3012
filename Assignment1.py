@@ -179,4 +179,3 @@ if __name__ == "__main__":
         tree.put(val)
 
     tree.print_tree()
-    
