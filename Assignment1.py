@@ -1,4 +1,6 @@
 import unittest
+from sys import stdout
+
 
 class Node(object):
     def __init__(self, val):
@@ -122,13 +124,44 @@ if __name__ == "__main__":
         print (tree.find_common(a, b))
     unittest.main()
 
+    def print_tree(self):
+        _print_tree(self.root)
+
+
+    def _print_tree(self, node):
+
+        if node is None:
+            print("")
+            return
+
+        if node.left is None:
+            print("")
+            return
+        else:
+            _print_tree(node.left)
+
+        if node.right is None:
+            print("")
+            return
+        else:
+            _print_tree(node.right)
+
+
 class TestStringMethods(unittest.TestCase):
+
+    def test_constructor(self):
+        tree = Tree()
+        self.assertEqual(tree.root, None)
+
+    def test_empty_tree(self):
+        tree = Tree()
+        self.assertEqual(tree.find_common(1, 2), None)
 
     def test_upper(self):
         self.assertEqual('foo'.upper(), 'FOO')
 
     def test_isupper(self):
-        self.assertTrue('FOo'.isupper())
+        self.assertTrue('FOO'.isupper())
         self.assertFalse('Foo'.isupper())
 
     def test_split(self):
@@ -137,3 +170,10 @@ class TestStringMethods(unittest.TestCase):
         # check that s.split fails when the separator is not a string
         with self.assertRaises(TypeError):
             s.split(2)
+
+if __name__ == "__main__":
+    #unittest.main()
+    vals = [1, 2, 3]
+    tree = Tree()
+    for val in vals:
+        tree.put(val)
