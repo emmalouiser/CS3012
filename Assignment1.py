@@ -178,14 +178,13 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(tree.get(8), 8)
         self.assertEqual(tree.get(30), 30)
 
-    def test_typeerror(self):
+    def test_nonstandardcharacters(self):
         vals = [30, 8, 52, 3, 20, 10, 29, 62]
         tree = Tree()
         for val in vals:
             tree.put(val)
-
-        #with self.assertRaises(TypeError):
-        #    tree.find_common(4, 29)
+        with self.assertRaises(TypeError):
+            tree.find_common('a', 'b')
 
 
     def test_isupper(self):
@@ -199,7 +198,10 @@ class TestStringMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             s.split(2)
 
-
+tree= Tree()
+print("Hi")
+print(tree.find_common('a', 'b'))
+print("Hi")
 unittest.main(exit=False)
 cov.stop()
 cov.report()
