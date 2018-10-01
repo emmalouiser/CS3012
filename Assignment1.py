@@ -1,9 +1,10 @@
 import unittest
 from sys import stdout
-#from coverage import Coverage
+from coverage import Coverage
 
-#cov = Coverage()
-#cov.start()
+cov = Coverage()
+cov.set_option('report:show_missing', True)
+cov.start()
 
 class Node(object):
     def __init__(self, val):
@@ -20,8 +21,7 @@ class Node(object):
     def __eq__(self, val):
         return self.val == val
 
-    def __str__(self):
-        return "[Node val: %d]" % self.val
+
 
 class Tree(object):
     def __init__(self):
@@ -107,8 +107,6 @@ class Tree(object):
     def _node_exists(self, node, val):
         return not self._get(node, val) is None
 
-    def print_tree(self):
-        self._print_tree(self.root)
 
 class TestStringMethods(unittest.TestCase):
 
@@ -127,6 +125,12 @@ class TestStringMethods(unittest.TestCase):
             tree.put(val)
 
         self.assertEqual(tree.find_common(1,3), 2)
+
+    def test_one_node_tree(self):
+        tree = Tree()
+        tree.put(2)
+
+        self.assertEqual(tree.find_common(2,2), None)
 
     def test_order(self):
         vals = [30, 8, 52, 3, 20, 10, 29, 62]
@@ -177,14 +181,6 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(tree.get(8), 8)
         self.assertEqual(tree.get(30), 30)
 
-    def test_put(self):
-        #test the put funtion of the tree
-        #put works if a traversal of the tree retruns numbers in order
-        vals = [30, 8, 52, 3, 20, 10, 29, 62]
-        tree = Tree()
-        for val in vals:
-            tree.put(val)
-
     def test_typeerror(self):
         vals = [30, 8, 52, 3, 20, 10, 29, 62]
         tree = Tree()
@@ -206,12 +202,12 @@ class TestStringMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             s.split(2)
 
-#Note to self - make a standard initilisation function.
+
 print("Hi")
-unittest.main()
+unittest.main(exit=False)
+
 print("Hi")
 
-#cov.stop()
-#cov.html_report(directory='covhtml')
+cov.stop()
 #cov.save()
-#cov.report()
+cov.report()
