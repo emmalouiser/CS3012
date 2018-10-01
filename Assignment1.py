@@ -101,9 +101,6 @@ class Tree(object):
             else:
                 return None
 
-    def node_exists(self, val):
-        return self._node_exists(self.root, val)
-
     def _node_exists(self, node, val):
         return not self._get(node, val) is None
 
@@ -203,11 +200,6 @@ class TestStringMethods(unittest.TestCase):
             s.split(2)
 
 
-print("Hi")
 unittest.main(exit=False)
-
-print("Hi")
-
 cov.stop()
-#cov.save()
 cov.report()
