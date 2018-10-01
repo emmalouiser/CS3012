@@ -158,6 +158,7 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(tree.find_common(3, 8), 30)
 
     def test_not_in_tree(self):
+        #test when the numbers are not in the tree
         vals = [30, 8, 52, 3, 20, 10, 29, 62]
         tree = Tree()
         for val in vals:
@@ -165,6 +166,33 @@ class TestStringMethods(unittest.TestCase):
 
         self.assertEqual(tree.find_common(4, 29), None)
         self.assertEqual(tree.find_common(29, 4), None)
+
+    def test_get(self):
+        #test the get function of Tree
+        vals = [30, 8, 52, 3, 20, 10, 29, 62]
+        tree = Tree()
+        for val in vals:
+            tree.put(val)
+
+        self.assertEqual(tree.get(8), 8)
+        self.assertEqual(tree.get(30), 30)
+
+    def test_put(self):
+        #test the put funtion of the tree
+        #put works if a traversal of the tree retruns numbers in order
+        vals = [30, 8, 52, 3, 20, 10, 29, 62]
+        tree = Tree()
+        for val in vals:
+            tree.put(val)
+
+    def test_typeerror(self):
+        vals = [30, 8, 52, 3, 20, 10, 29, 62]
+        tree = Tree()
+        for val in vals:
+            tree.put(val)
+
+        with self.assertRaises(TypeError):
+            tree.find_common(4, 29)
 
 
     def test_isupper(self):
@@ -178,11 +206,12 @@ class TestStringMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             s.split(2)
 
+#Note to self - make a standard initilisation function.
 print("Hi")
 unittest.main()
 print("Hi")
 
-    #cov.stop()
-    #cov.html_report(directory='covhtml')
-    #cov.save()
-    #cov.report()
+#cov.stop()
+#cov.html_report(directory='covhtml')
+#cov.save()
+#cov.report()
