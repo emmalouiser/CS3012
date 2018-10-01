@@ -143,6 +143,7 @@ class TestStringMethods(unittest.TestCase):
         for val in vals:
             tree.put(val)
 
+        #Test all scenarios
         self.assertEqual(tree.find_common(3, 29), 8)
         self.assertEqual(tree.find_common(10, 29), 20)
         self.assertEqual(tree.find_common(20, 52), 30)
@@ -177,10 +178,9 @@ class TestStringMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             s.split(2)
 
-if __name__ == "__main__":
-    print("Hi")
-    unittest.main()
-    print("Hi")
+print("Hi")
+unittest.main()
+print("Hi")
 
     #cov.stop()
     #cov.html_report(directory='covhtml')
