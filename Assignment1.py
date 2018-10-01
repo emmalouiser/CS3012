@@ -191,8 +191,8 @@ class TestStringMethods(unittest.TestCase):
         for val in vals:
             tree.put(val)
 
-        with self.assertRaises(TypeError):
-            tree.find_common(4, 29)
+        #with self.assertRaises(TypeError):
+        #    tree.find_common(4, 29)
 
 
     def test_isupper(self):
