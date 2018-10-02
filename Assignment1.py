@@ -27,9 +27,7 @@ class Tree(object):
         self.root = None
 
     def put(self, val):
-        if self.node_exists(val):
-            print("node exists")
-        else:
+        if not (self.node_exists(val)):
             self.root = self._put(self.root, val)
 
     def _put(self, node, val):
@@ -58,7 +56,10 @@ class Tree(object):
 
     # This method returns `None` if no common is found
     def find_common(self, a, b):
-        return self._find_common(self.root, a, b)
+        if a == b:
+            return
+        else:
+            return self._find_common(self.root, a, b)
 
 
     def _find_common(self, node, a, b):
@@ -147,7 +148,8 @@ class TestStringMethods(unittest.TestCase):
         for val in vals:
             tree.put(val)
 
-        self.assertEqual(tree.find_common(3,3), 2)
+        self.assertEqual(tree.find_common(3,3), None)
+        self.assertEqual(tree.find_common(1,1), None)
 
     def test_one_node_tree(self):
         tree = Tree()
@@ -213,15 +215,7 @@ class TestStringMethods(unittest.TestCase):
             tree.find_common('a', 'b')
 
 
-#unittest.main(exit=False)
-vals = [1, 2, 3, 3, 3]
-tree = Tree()
-for val in vals:
-    tree.put(val)
-
-print("ans: " + str(tree.find_common(3,3)))
-
-tree.print_tree()
+unittest.main(exit=False)
 
 cov.stop()
 cov.report()
