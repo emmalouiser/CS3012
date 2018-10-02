@@ -214,6 +214,14 @@ class TestStringMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             tree.find_common('a', 'b')
 
+    def test_nonstandardcharacters_tree(self):
+        vals = ['b', 'c', 'a']
+        tree = Tree()
+        for val in vals:
+            tree.put(val)
+        self.assertEqual(tree.find_common('a', 'c'), 'b')
+        self.assertEqual(tree.find_common('a', 'b'), None)
+
 
 unittest.main(exit=False)
 
