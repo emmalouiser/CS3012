@@ -27,7 +27,10 @@ class Tree(object):
         self.root = None
 
     def put(self, val):
-        self.root = self._put(self.root, val)
+        if self.node_exists(val):
+            print("node exists")
+        else:
+            self.root = self._put(self.root, val)
 
     def _put(self, node, val):
         if node is None:
@@ -114,7 +117,7 @@ class Tree(object):
         if node is None:
             return
 
-        self._print_tree(node.right)
+        self._print_tree(node.left)
         print(node.val)
         self._print_tree(node.right)
 
@@ -211,8 +214,7 @@ class TestStringMethods(unittest.TestCase):
 
 
 #unittest.main(exit=False)
-
-vals = [2, 1, 3, 3, 3]
+vals = [1, 2, 3, 3, 3]
 tree = Tree()
 for val in vals:
     tree.put(val)
