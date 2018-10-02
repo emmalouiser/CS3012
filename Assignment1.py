@@ -156,6 +156,7 @@ class TestStringMethods(unittest.TestCase):
         tree.put(2)
 
         self.assertEqual(tree.find_common(2,2), None)
+        self.assertEqual(tree.find_common(1,2), None)
 
     def test_order(self):
         vals = [30, 8, 52, 3, 20, 10, 29, 62]
