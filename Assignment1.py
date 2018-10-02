@@ -22,7 +22,6 @@ class Node(object):
         return self.val == val
 
 
-
 class Tree(object):
     def __init__(self):
         self.root = None
@@ -57,6 +56,7 @@ class Tree(object):
     # This method returns `None` if no common is found
     def find_common(self, a, b):
         return self._find_common(self.root, a, b)
+
 
     def _find_common(self, node, a, b):
         if node is None:
@@ -101,9 +101,24 @@ class Tree(object):
             else:
                 return None
 
+    def node_exists(self, val):
+        return self._node_exists(self.root, val)
+
     def _node_exists(self, node, val):
         return not self._get(node, val) is None
 
+    def print_tree(self):
+        self._print_tree(self.root)
+
+    def _print_tree(self, node):
+        if node is None:
+            return
+
+        self._print_tree(node.right)
+        print(node.val)
+        self._print_tree(node.right)
+
+        return
 
 class TestStringMethods(unittest.TestCase):
 
@@ -116,12 +131,20 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(tree.find_common(1, 2), None)
 
     def test_simple_tree(self):
-        vals = [2, 1, 3, 3]
+        vals = [2, 1, 3]
         tree = Tree()
         for val in vals:
             tree.put(val)
 
         self.assertEqual(tree.find_common(1,3), 2)
+
+    def test_entry_of_duplicates(self):
+        vals = [2, 1, 3, 3, 3]
+        tree = Tree()
+        for val in vals:
+            tree.put(val)
+
+        self.assertEqual(tree.find_common(3,3), 2)
 
     def test_one_node_tree(self):
         tree = Tree()
@@ -187,21 +210,16 @@ class TestStringMethods(unittest.TestCase):
             tree.find_common('a', 'b')
 
 
-    def test_isupper(self):
-        self.assertTrue('FOO'.isupper())
-        self.assertFalse('Foo'.isupper())
+#unittest.main(exit=False)
 
-    def test_split(self):
-        s = 'hello world'
-        self.assertEqual(s.split(), ['hello', 'world'])
-        # check that s.split fails when the separator is not a string
-        with self.assertRaises(TypeError):
-            s.split(2)
+vals = [2, 1, 3, 3, 3]
+tree = Tree()
+for val in vals:
+    tree.put(val)
 
-tree= Tree()
-print("Hi")
-print(tree.find_common('a', 'b'))
-print("Hi")
-unittest.main(exit=False)
+print("ans: " + str(tree.find_common(3,3)))
+
+tree.print_tree()
+
 cov.stop()
 cov.report()
