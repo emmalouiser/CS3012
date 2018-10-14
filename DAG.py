@@ -1,5 +1,4 @@
 class Graph(object):
-
     def __init__(self, graph_dict=None):
         if graph_dict == None:
             graph_dict = set({})
