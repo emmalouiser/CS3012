@@ -3,6 +3,7 @@ class Graph(object):
         if graph_dict == None:
             graph_dict = set({})
         self.__graph_dict = graph_dict
+        print(test)
 
     def vertices(self):
         """ returns the vertices of a graph """
