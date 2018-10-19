@@ -36,14 +36,17 @@ class Graph(object):
         """ assumes that edge is of type set, tuple or list;
             between two vertices can be multiple edges!
         """
-        edge = set(edge)
+        edge = tuple(edge)
         if len(edge) != 2:
             return
         (vertex1, vertex2) = tuple(edge)
-        if vertex1 in self.__graph_dict:
+        if vertex1 in self.__graph_dict and vertex2 in self.__graph_dict:
             self.__graph_dict[vertex1].append(vertex2)
         else:
-            self.__graph_dict[vertex1] = [vertex2]
+            self.add_vertex(vertex2)
+            self.add_vertex(vertex1)
+            print(self.__graph_dict)
+            self.__graph_dict[vertex1].append(vertex2)
 
     def __generate_edges(self):
         """ A static method generating the edges of the
@@ -121,6 +124,50 @@ class TestStringMethods(unittest.TestCase):
         self.assertEqual(graph.edges(), [{1, 2}, {1, 3}, {2, 4}, {2, 5}, {2, 3}, {3, 5}, {4, 6}, {5, 6}, {6, 7}])
 
         graph.add_edge({2, 2})
+        graph.add_edge({2, 3, 4})
+
+    def test_add_new_edge(self):
+        g = {   1: [2, 3],
+                2: [4, 5],
+                3: [5],
+                4: [6],
+                5: [6],
+                6: [7],
+                7: []}
+
+        graph = Graph(g)
+        graph.add_edge({1, 10})
+        self.assertEqual(graph.edges(), [{1, 2}, {1, 3}, {1, 10}, {2, 4}, {2, 5}, {3, 5}, {4, 6}, {5, 6}, {6, 7}])
+        self.assertEqual(graph.vertices(), [1, 2, 3, 4, 5, 6, 7, 10])
+
+    def test_add_new_edge_reverse(self):
+        g = {   1: [2, 3],
+                2: [4, 5],
+                3: [5],
+                4: [6],
+                5: [6],
+                6: [7],
+                7: []}
+
+        graph = Graph(g)
+        graph.add_edge((10, 1))
+        self.assertEqual(graph.edges(), [{1, 2}, {1, 3}, {2, 4}, {2, 5}, {3, 5}, {4, 6}, {5, 6}, {6, 7}, {10, 1}])
+        self.assertEqual(graph.vertices(), [1, 2, 3, 4, 5, 6, 7, 10])
+
+        g = {   1: [2, 3],
+                2: [4, 5],
+                3: [5],
+                4: [6],
+                5: [6],
+                6: [7],
+                7: []}
+
+        graph = Graph(g)
+        graph.add_edge((1, 10))
+        self.assertEqual(graph.edges(), [{1, 2}, {1, 3}, {1, 10}, {2, 4}, {2, 5}, {3, 5}, {4, 6}, {5, 6}, {6, 7}])
+        self.assertEqual(graph.vertices(), [1, 2, 3, 4, 5, 6, 7, 10])
+
+
 
 unittest.main(exit=False)
 
