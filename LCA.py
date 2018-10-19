@@ -1,4 +1,6 @@
 from DAG import Graph
+import sys
+sys.dont_write_bytecode = True
 
 def LCA( graph, a, b):
     dfs_a = graph.dfs_recursive(a, [])

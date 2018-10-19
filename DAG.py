@@ -1,9 +1,19 @@
+import unittest
+from sys import stdout
+from coverage import Coverage
+
+cov = Coverage()
+cov.set_option('report:show_missing', True)
+cov.start()
+
+import sys
+sys.dont_write_bytecode = True
+
 class Graph(object):
     def __init__(self, graph_dict=None):
         if graph_dict == None:
-            graph_dict = set({})
+            graph_dict = dict({})
         self.__graph_dict = graph_dict
-        print(test)
 
     def vertices(self):
         """ returns the vertices of a graph """
@@ -63,3 +73,52 @@ class Graph(object):
                 path = self.dfs_recursive(neighbor, path)
 
         return path
+
+class TestStringMethods(unittest.TestCase):
+
+    def test_constructor(self):
+        graph = Graph()
+        self.assertEqual(graph.vertices(), [])
+        self.assertEqual(graph.edges(), [])
+
+    def test_constructor_notnull(self):
+        g = {   1: [2, 3],
+                2: [4, 5],
+                3: [5],
+                4: [6],
+                5: [6],
+                6: [7],
+                7: []}
+
+        graph = Graph(g)
+        self.assertEqual(graph.vertices(), [1, 2, 3, 4, 5, 6, 7])
+        self.assertEqual(graph.edges(), [{1, 2}, {1, 3}, {2, 4}, {2, 5}, {3, 5}, {4, 6}, {5, 6}, {6, 7}])
+
+    def test_add_vertex(self):
+        graph = Graph()
+        graph.add_vertex(2)
+        self.assertEqual(graph.vertices(), [2])
+
+    def test_add_vertex(self):
+        graph = Graph()
+        graph.add_vertex(2)
+        self.assertEqual(graph.vertices(), [2])
+
+    def test_add_edge(self):
+        g = {   1: [2, 3],
+                2: [4, 5],
+                3: [5],
+                4: [6],
+                5: [6],
+                6: [7],
+                7: []}
+
+        graph = Graph(g)
+        graph.add_edge({2, 3})
+        self.assertEqual(graph.edges(), [{1, 2}, {1, 3}, {2, 4}, {2, 5}, {2, 3}, {3, 5}, {4, 6}, {5, 6}, {6, 7}])
+
+
+unittest.main(exit=False)
+
+cov.stop()
+cov.report()
