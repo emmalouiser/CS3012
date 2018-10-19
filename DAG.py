@@ -37,6 +37,8 @@ class Graph(object):
             between two vertices can be multiple edges!
         """
         edge = set(edge)
+        if len(edge) != 2:
+            return
         (vertex1, vertex2) = tuple(edge)
         if vertex1 in self.__graph_dict:
             self.__graph_dict[vertex1].append(vertex2)
@@ -99,8 +101,6 @@ class TestStringMethods(unittest.TestCase):
         graph.add_vertex(2)
         self.assertEqual(graph.vertices(), [2])
 
-    def test_add_vertex(self):
-        graph = Graph()
         graph.add_vertex(2)
         self.assertEqual(graph.vertices(), [2])
 
@@ -117,6 +117,10 @@ class TestStringMethods(unittest.TestCase):
         graph.add_edge({2, 3})
         self.assertEqual(graph.edges(), [{1, 2}, {1, 3}, {2, 4}, {2, 5}, {2, 3}, {3, 5}, {4, 6}, {5, 6}, {6, 7}])
 
+        graph.add_edge({2, 3})
+        self.assertEqual(graph.edges(), [{1, 2}, {1, 3}, {2, 4}, {2, 5}, {2, 3}, {3, 5}, {4, 6}, {5, 6}, {6, 7}])
+
+        graph.add_edge({2, 2})
 
 unittest.main(exit=False)
 
