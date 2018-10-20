@@ -10,14 +10,18 @@ cov = Coverage()
 cov.set_option('report:show_missing', True)
 cov.start()
 
-def LCA( graph, a, b):
-    dfs_a = graph.dfs_recursive(a, [])
-    dfs_b = graph.dfs_recursive(b, [])
+def LCA(graph, a, b):
+    if a in graph.vertices() and b in graph.vertices():
+        dfs_a = graph.dfs_recursive(a, [])
+        dfs_b = graph.dfs_recursive(b, [])
 
-    for i in range(len(dfs_a)):
-      if dfs_a[i] == dfs_b[i]:
-          return dfs_a[i]
-    else:
+        for i in range(len(dfs_a)):
+          if dfs_a[i] == dfs_b[i]:
+              return dfs_a[i]
+        else:
+            return -1;
+
+    else: 
         return -1;
 
 class TestStringMethods(unittest.TestCase):

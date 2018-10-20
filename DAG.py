@@ -45,7 +45,6 @@ class Graph(object):
         else:
             self.add_vertex(vertex2)
             self.add_vertex(vertex1)
-            print(self.__graph_dict)
             self.__graph_dict[vertex1].append(vertex2)
 
     def __generate_edges(self):
@@ -71,8 +70,8 @@ class Graph(object):
         return res
 
     def dfs_recursive(self, vertex, path):
-        path += [vertex]
 
+        path += [vertex]
         for neighbor in self.__graph_dict[vertex]:
             if neighbor not in path:
                 path = self.dfs_recursive(neighbor, path)
