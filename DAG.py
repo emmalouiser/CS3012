@@ -9,6 +9,12 @@ cov.start()
 import sys
 sys.dont_write_bytecode = True
 
+
+#REFERENCE
+#Basic Graph structure was obtained from the following sources:
+#http://www.nco.ncep.noaa.gov/pmb/codes/nwprod/nwm.v1.2.2/ush/resume_forecast/Graph.py
+#https://www.python-course.eu/graphs_python.php
+
 class Graph(object):
     def __init__(self, graph_dict=None):
         if graph_dict == None:

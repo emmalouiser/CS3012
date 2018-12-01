@@ -6,6 +6,10 @@ cov = Coverage()
 cov.set_option('report:show_missing', True)
 cov.start()
 
+#REFERENCE
+#Python Basic Tree Structure obtained from following source:
+#https://gist.github.com/landau/5885132
+
 class Node(object):
     def __init__(self, val):
         self.val = val
@@ -54,7 +58,6 @@ class Tree(object):
 
         return None
 
-    # This method returns `None` if no common is found
     def find_common(self, a, b):
         if a == b:
             return
@@ -65,40 +68,32 @@ class Tree(object):
     def _find_common(self, node, a, b):
         if node is None:
             return None
-        # Traverse right until a diverge occurs
+
         if a > node and b > node:
             if node.right is None: return None
 
-            # if right node is `a` or `b` then we found common
             if node.right == a or node.right == b:
                 return node.val
 
             return self._find_common(node.right, a, b)
 
-        # Traverse left until a diverge occurs
         elif a < node and b < node:
             if node.left is None: return None
 
-            # if left node is `a` or `b` then we found common
             if node.left == a or node.left == b:
                 return node.val
 
             return self._find_common(node.left, a, b)
 
-        # root does not have any common ancestor
-        # This test is later because we dont want the
-        # recursion to hit it every time
         elif a == self.root or b == self.root:
             return None
 
         else:
-            # A diverge of the tree traversal occurs here
-            # So the current node is a potential common ancestor
-            # Verify that a and b are legitimate nodes
+
             if self._node_exists(node, a):
-                # `a` exists ensure `b` exists
+
                 if self._node_exists(node, b):
-                    # Common ancestor is validated
+            
                     return node.val
                 else:
                     return None
